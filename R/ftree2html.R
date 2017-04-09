@@ -3,7 +3,7 @@ ftree2html<-function(DF,dir="", write_file=FALSE){
 
 	html_string<-paste0(
 		HTMLhead,
-		hierarchyDF2json(DF,data.col=c(1,5:10,13:17,22)),
+		hierarchyDF2json(DF,data.col=c(1,5:10,13:15,18,22)),
 		';',
 		HTMLd3script,
 		'</script>'
@@ -55,7 +55,7 @@ var root =
 '
 
 HTMLd3script<-'
-var duration = 200,rectW = 124,rectH = 90,TrectH = 24;
+var duration = 200,rectW = 124,rectH = 120,TrectH = 40;
 var width_initial = $(window).width()/2-60;
 var tree = d3.layout.tree()
 .nodeSize([rectW*1.15, rectH*1.2])
@@ -96,22 +96,16 @@ nodeEnter.append("text")
 .attr("y", 10)
 .attr("text-anchor", "middle")
 .text(function (d) {
-return d.name;});
-nodeEnter.append("text")
-.attr("x", rectW/2)
-.attr("y", 17)
-.attr("dy", ".35em")
-.attr("text-anchor", "middle")
-.text(function (d) {
-return d.name2;});
-var orGate="m 75,65 c  -1.4, -10, .6, -22 -15, -30 -15.6, 8, -13.4, 20, -15, 30, 0, 0 3, -8 15, -8 10, 0 15, 8 15, 8 z";
-var andGate="m 45,50 0,15 30,0 0,-15  a15,15 .2 0,0 -15,-15 a15,15 .2 0,0 -15,15";
-var priorityGate="m 45,50 0,15 30,0 0,-15  a15,15 .2 0,0 -15,-15 a15,15 .2 0,0 -15,15 m 0,10 30,0";
-var inhibitGate="m 60,35 -15,6.340 0,17.3205 15,6.340  15,-6.340 0,-17.3205 z";
-var alarmGate="m 75,65 c  -1.4, -10, .6, -22 -15, -30 -15.6, 8, -13.4, 20, -15, 30, 0, 0 3, -8 15, -8 10, 0 15, 8 15, 8 z m -30,0 v5 c0, 0 3, -8 15, -8 10, 0 15, 8 15, 8 v-5";
-var voteGate="m 75,65 c  -1.4,-10,.6,-22-15,-30  -15.6,8,-13.4,20,-15,30 m 0,0 0,10 30,0 0,-10 m-28,-7.5 27,0"; 
-var house="m 45,50 0,15 30,0 0,-15 -15,-15  -15,15";
-var component="m 75, 50 a15,15 .2 0,0 -15,-15 a15,15 .2 0,0 -15,15 a15,15 .2 0,0 15,15 a15,15 .2 0,0 15,-15";
+return d.description;})
+.call(wrap, rectW);
+var orGate="m 75,85 c  -1.4, -10, .6, -22 -15, -30 -15.6, 8, -13.4, 20, -15, 30, 0, 0 3, -8 15, -8 10, 0 15, 8 15, 8 z";
+var andGate="m 45,70 0,15 30,0 0,-15  a15,15 .2 0,0 -15,-15 a15,15 .2 0,0 -15,15";
+var priorityGate="m 45,70 0,15 30,0 0,-15  a15,15 .2 0,0 -15,-15 a15,15 .2 0,0 -15,15 m 0,10 30,0";
+var inhibitGate="m 60,55 -15,6.340 0,17.3205 15,6.340  15,-6.340 0,-17.3205 z";
+var alarmGate="m 75,85 c  -1.4, -10, .6, -22 -15, -30 -15.6, 8, -13.4, 20, -15, 30, 0, 0 3, -8 15, -8 10, 0 15, 8 15, 8 z m -30,0 v5 c0, 0 3, -8 15, -8 10, 0 15, 8 15, 8 v-5";
+var voteGate="m 75,85 c  -1.4,-10,.6,-22-15,-30  -15.6,8,-13.4,20,-15,30 m 0,0 0,10 30,0 0,-10 m-28,-7.5 27,0";
+var house="m 45,70 0,15 30,0 0,-15 -15,-15  -15,15";
+var component="m 75, 70 a15,15 .2 0,0 -15,-15 a15,15 .2 0,0 -15,15 a15,15 .2 0,0 15,15 a15,15 .2 0,0 15,-15";
 nodeEnter.append("path")
 .attr("d",
 function(d) {switch (d.type) {
@@ -139,7 +133,7 @@ default : return(component);
 fill: "#fff"});
 nodeEnter.append("text")
 .attr("x", rectW / 2-2)
-.attr("y", TrectH  + 25)
+.attr("y", TrectH  + 30)
 .attr("text-anchor", "middle")
 .attr("fill",  function(d){return d.moe==0 ? "red": "magenta";})
 //.attr("font", "12px")
@@ -156,21 +150,21 @@ nodeEnter.append("text")
 return d.type>14 && d.p2>0 ? parseInt(d.p1)+" :"+parseInt(d.p2) : d.type==16 ? parseInt(d.p1)+" :" : "" ;});
 nodeEnter.append("text")
 .attr("x", rectW / 2 -56)
-.attr("y", TrectH  -26)
+.attr("y", TrectH  -45)
 .attr("text-anchor", "middle")
 .attr("fill", "magenta")
 .text(function (d) {
 return d.moe > 0 ? "R" : d.moe<0 ? "S" : "" ;});
 nodeEnter.append("text")
 .attr("x", rectW / 2 -28)
-.attr("y", TrectH  -26)
+.attr("y", TrectH  -45)
 .attr("text-anchor", "right")
 .attr("fill", "navy")
 .text(function (d) {
 return d.condition > 0 ? "Cond" : "" ;});
 nodeEnter.append("text")
 .attr("x", rectW / 2 +44)
-.attr("y", TrectH  -26)
+.attr("y", TrectH  -45)
 .attr("text-anchor", "right")
 .attr("fill",  function(d){return d.moe==0 ? "red": "magenta";})
 .text(function (d) {
@@ -314,4 +308,34 @@ return "M" + sourceX + "," + sourceY
 + "V" + (sourceY+targetY)/2
 + "H" + targetX
 + "V" + targetY;}
+function wrap(text, width) {
+text.each(function () {
+var description = d3.select(this).text();
+while (true) {
+var words = description.split(/\\s+/).reverse(),
+word,
+line = [],
+lineNumber = 0,
+lineHeight = 1.2, // ems
+x = d3.select(this).attr("x"),
+y = d3.select(this).attr("y"),
+dy = d3.select(this).attr("dy") ? d3.select(this).attr("dy") : 0;
+tspan = d3.select(this).text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
+while (word = words.pop()) {
+line.push(word);
+tspan.text(line.join(" "));
+if (tspan.node().getComputedTextLength() > width) {
+line.pop();
+tspan.text(line.join(" "));
+line = [word];
+tspan = d3.select(this).append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+}
+}
+if (lineNumber > 2)
+width += 20;
+else
+break;
+}
+});
+}
 '
