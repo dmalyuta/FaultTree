@@ -16,6 +16,8 @@
 
 addLatent<-function(DF, at, mttf, mttr=NULL, pzero="repair", inspect=NULL, display_under=NULL, tag="", name="",name2="", description="")  {
 
+  at <- tagconnect(DF, at)
+  
 	tp<-2
 
 	info<-test.basic(DF, at,  display_under, tag)

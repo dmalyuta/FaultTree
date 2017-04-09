@@ -15,6 +15,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 addProbability<-function(DF, at, prob, display_under=NULL, tag="", name="", name2="", description="")  {
+  
+  at <- tagconnect(DF, at)
 
  	tp=4
 

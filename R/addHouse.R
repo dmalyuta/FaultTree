@@ -14,11 +14,13 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-addHouse<-function(DF, at, prob=1, name="", name2="", description="")  {
+addHouse<-function(DF, at, prob=1, tag="", name="", name2="", description="")  {
 
- 	tp=6
+  at <- tagconnect(DF, at)
+  
+ 	tp <- 6
 
-	info<-test.basic(DF, at,  display_under=NULL, tag="")
+	info<-test.basic(DF, at,  display_under=NULL, tag)
 	thisID<-info[1]
 	parent<-info[2]
 	gp<-info[3]
@@ -58,7 +60,7 @@ addHouse<-function(DF, at, prob=1, name="", name2="", description="")  {
 		EType=	0	,		
 		P1=	-1	,		
 		P2=	-1	,
-		Tag_Obj=	""	,
+		Tag_Obj=	tag	,
 		Name=	name	,
 		Name2=	name2	,
 		Description=	description	,

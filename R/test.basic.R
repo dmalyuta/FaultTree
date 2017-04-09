@@ -23,6 +23,11 @@
 test.basic<-function(DF, at,  display_under, tag)  {
 
 	if(!test.ftree(DF)) stop("first argument must be a fault tree")
+  
+  # tag must be a string (restriction to differentiate tags from at IDs)
+  if (! (is.character(tag) & length(tag) == 1)) {
+    stop("tag must a string!")
+  }
 
 	parent<-which(DF$ID== at)
 	if(length(parent)==0) {stop("connection reference not valid")}

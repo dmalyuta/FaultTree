@@ -16,7 +16,7 @@
 
 
 ftree.make<-function(type, reversible_cond=FALSE, cond_first=TRUE, 
-		human_pbf=NULL, start_id=1, vote_par=NULL, name="top event", name2="",description="")  {
+		human_pbf=NULL, start_id=1, vote_par=NULL, tag="", name="top event", name2="",description="")  {
 
 	thisID<-start_id
 	
@@ -103,7 +103,7 @@ ftree.make<-function(type, reversible_cond=FALSE, cond_first=TRUE,
 		EType=	0	,
 		P1=	p1	,
 		P2=	p2	,
-		Tag_Obj=	""	,
+		Tag_Obj=	tag	,
 		Name=	name	,
 		Name2=	name2	,
 		Description=	description	,

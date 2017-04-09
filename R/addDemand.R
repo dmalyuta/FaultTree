@@ -16,6 +16,8 @@
 
 addDemand<-function(DF, at, mttf, tag="", name="", name2="", description="")  {
 
+  at <- tagconnect(DF, at)
+  
 	tp=3
 	
 ## Model test

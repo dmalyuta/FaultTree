@@ -15,7 +15,9 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 addActive<-function(DF, at, mttf=NULL, mttr=NULL, display_under=NULL, tag="", name="",name2="",description="")  {
-
+  
+  at <- tagconnect(DF, at)
+  
 	tp<-1
 
 ## Model test

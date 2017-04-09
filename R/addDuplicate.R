@@ -1,5 +1,7 @@
 addDuplicate<-function(DF, at, dup_id, display_under=NULL)  {
 	if(!test.ftree(DF)) stop("first argument must be a fault tree")
+  
+  at <- tagconnect(DF, at)
 
 ## parent qualification test only required once
 	parent<-which(DF$ID== at)

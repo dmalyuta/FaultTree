@@ -17,6 +17,8 @@
  addExposed<-function (DF, at, mttf, exposure=NULL, dist="exponential", param=NULL,
 		display_under=NULL, tag="", name="",name2="", description="")  {
 
+   at <- tagconnect(DF, at)
+   
 	if (is.null(exposure)) {
 		if(exists("mission_time")) {
 			exposure<-"mission_time"

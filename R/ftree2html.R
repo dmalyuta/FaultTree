@@ -63,15 +63,11 @@ var tree = d3.layout.tree()
 var svg = d3.select("#body").append("svg").attr("width", "100%").attr("height", "100%")
 .call(zm = d3.behavior.zoom().scaleExtent([0.05,5]).on("zoom", redraw)).append("g")
 .attr("transform", "translate(" + width_initial + "," + 50 + ")");
-zm.translate([width_initial, 20]);
+zm.translate([width_initial, 50]);
 root.x0 = 0;
 root.y0 = height / 2;
-function collapse(d) {
-if (d.children) {
-d._children = d.children;
-d._children.forEach(collapse);
-d.children = null;}}
 update(root);
+autocollapse(root);
 d3.select("#body").style("height", "100%");
 function update(source) {
 var nodes = tree.nodes(root)
@@ -295,6 +291,16 @@ d.children = null;
 d.children = d._children;
 d._children = null;}
 update(d);}
+function autocollapse(d) {
+svg.selectAll("g.node").each(function(d) {
+var duration_backup = duration;
+duration = 0;
+if (d.collapse) {
+click(d);
+}
+duration = duration_backup;
+})
+}
 function redraw() {
 svg.attr("transform",
 "translate(" + d3.event.translate + ")"

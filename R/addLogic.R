@@ -15,10 +15,12 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 addLogic<-function(DF, type, at, reversible_cond=FALSE, cond_first=TRUE, human_pbf=NULL, 
-		vote_par=NULL, name="", name2="", description="")  {
+		vote_par=NULL, tag="", name="", name2="", description="")  {
 
 	if(!test.ftree(DF)) stop("first argument must be a fault tree")
-	
+  
+  at <- tagconnect(DF, at)
+  
 	if(type=="atleast") {
 		stop("atleast must be added through FaultTree.SCRAM::addAtLeast")
 	}
@@ -45,39 +47,15 @@ addLogic<-function(DF, type, at, reversible_cond=FALSE, cond_first=TRUE, human_p
 		}	
 	}
 	
-	
-	parent<-which(DF$ID== at)
-	if(length(parent)==0) {stop("connection reference not valid")}
-	thisID<-max(DF$ID)+1
-	if(DF$Type[parent]<10) {stop("non-gate connection requested")}
-
-	if(!DF$MOE[parent]==0) {
-		stop("connection cannot be made to duplicate nor source of duplication")
-	}
+	info<-test.basic(DF, at,  display_under=NULL, tag)
+	thisID<-info[1]
+	parent<-info[2]
+	gp<-info[3]
+	condition<-info[4]
 	
 	if(DF$Type[parent]==15) {
-		if(length(which(DF$CParent==at))>0) {
-			stop("connection slot not available")
-		}
 		if(tp!=10) {
 			stop("only OR or basic event can connect to priority gate")
-		}
-	}
-
-	condition=0
-	if(DF$Type[parent]>11&& DF$Type[parent]<15 )  {
-		if(length(which(DF$CParent==at))>1)  {
-		stop("connection slot not available")
-		}
-		if( length(which(DF$CParent==at))==0)  {
-			if(DF$Cond_Code[parent]<10)  {
-				condition=1
-			}
-		}else{
-##  length(which(DF$CParent==at))==1
-			if(DF$Cond_Code[parent]>9)  {
-				condition=1
-			}
 		}
 	}
 
@@ -146,7 +124,7 @@ addLogic<-function(DF, type, at, reversible_cond=FALSE, cond_first=TRUE, human_p
 		EType=	0	,
 		P1=	p1	,
 		P2=	p2	,
-		Tag_Obj=	""	,
+		Tag_Obj=	tag	,
 		Name=	name	,
 		Name2=	name2	,
 		Description=	description	,
