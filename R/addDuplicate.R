@@ -1,7 +1,8 @@
-addDuplicate<-function(DF, at, dup_id, display_under=NULL)  {
+addDuplicate<-function(DF, at, dup_id, display_under=NULL, collapse=TRUE)  {
 	if(!test.ftree(DF)) stop("first argument must be a fault tree")
   
   at <- tagconnect(DF, at)
+  dup_id <- tagconnect(DF, dup_id)
 
 ## parent qualification test only required once
 	parent<-which(DF$ID== at)
@@ -110,6 +111,11 @@ addDuplicate<-function(DF, at, dup_id, display_under=NULL)  {
 		moe<-DF$ID[dup_row]
 	}
 
+		do_collapse <- DF$Collapse[dup_row]
+		if (dup_row==dup_id) {
+		  # this is the base node user wants to duplicate
+		  do_collapse <- collapse
+		}
 
 		Dfrow<-data.frame(
 			ID=	DF$ID[dup_row]+id_offset	,
@@ -132,7 +138,8 @@ addDuplicate<-function(DF, at, dup_id, display_under=NULL)  {
 			Description=	DF$Description[dup_row]	,
 			UType=	DF$UType[dup_row]	,
 			UP1=	DF$UP1[dup_row]  ,
-			UP2=	DF$UP2[dup_row]	
+			UP2=	DF$UP2[dup_row]	,
+			Collapse = do_collapse # if the user requests, only collapse the top element (i.e. the one being duplicated) (then uncollapsing this element has all its children uncollapsed/collapsed as they are in the original source)
 		)
 
 		DF<-rbind(DF, Dfrow)

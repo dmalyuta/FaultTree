@@ -3,7 +3,7 @@ ftree2html<-function(DF,dir="", write_file=FALSE){
 
 	html_string<-paste0(
 		HTMLhead,
-		hierarchyDF2json(DF,data.col=c(1,5:10,13:17)),
+		hierarchyDF2json(DF,data.col=c(1,5:10,13:17,22)),
 		';',
 		HTMLd3script,
 		'</script>'
@@ -66,8 +66,11 @@ var svg = d3.select("#body").append("svg").attr("width", "100%").attr("height", 
 zm.translate([width_initial, 50]);
 root.x0 = 0;
 root.y0 = height / 2;
+var duration_backup = duration;
+duration = 0;
 update(root);
 autocollapse(root);
+duration = duration_backup;
 d3.select("#body").style("height", "100%");
 function update(source) {
 var nodes = tree.nodes(root)
@@ -293,12 +296,9 @@ d._children = null;}
 update(d);}
 function autocollapse(d) {
 svg.selectAll("g.node").each(function(d) {
-var duration_backup = duration;
-duration = 0;
-if (d.collapse) {
+if (d.collapse=="TRUE") {
 click(d);
 }
-duration = duration_backup;
 })
 }
 function redraw() {

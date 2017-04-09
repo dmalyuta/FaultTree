@@ -16,7 +16,7 @@
 
 
 ftree.make<-function(type, reversible_cond=FALSE, cond_first=TRUE, 
-		human_pbf=NULL, start_id=1, vote_par=NULL, tag="", name="top event", name2="",description="")  {
+		human_pbf=NULL, start_id=1, vote_par=NULL, tag="", name="top event", name2="",description="", collapse=FALSE)  {
 
 	thisID<-start_id
 	
@@ -110,7 +110,8 @@ ftree.make<-function(type, reversible_cond=FALSE, cond_first=TRUE,
 		UType=	0	,
 		UP1=	-1	,
 		UP2=	-1	,		
-		stringsAsFactors = FALSE
+		stringsAsFactors = FALSE,
+		Collapse = collapse
 	)
 DF
 }
@@ -135,6 +136,7 @@ FT_FIELDS<-c("ID",
 	"Description",
 	"UType",
 	"UP1",
-	"UP2"	
+	"UP2",
+	"Collapse"
 	)
 

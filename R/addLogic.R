@@ -15,7 +15,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 addLogic<-function(DF, type, at, reversible_cond=FALSE, cond_first=TRUE, human_pbf=NULL, 
-		vote_par=NULL, tag="", name="", name2="", description="")  {
+		vote_par=NULL, tag="", name="", name2="", description="", collapse=FALSE)  {
 
 	if(!test.ftree(DF)) stop("first argument must be a fault tree")
   
@@ -130,7 +130,8 @@ addLogic<-function(DF, type, at, reversible_cond=FALSE, cond_first=TRUE, human_p
 		Description=	description	,
 		UType=	0	,
 		UP1=	-1	,
-		UP2=	-1	
+		UP2=	-1	,
+		Collapse = collapse
 	)
 
 
