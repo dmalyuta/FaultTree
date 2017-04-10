@@ -6,17 +6,17 @@ cutsets<-function(DF)  {
 	 if(any(DF$Type==15)) {
 		stop("vote gate not recognized by cutsets function")
 	 }	 
-	 if(any(DF$Type>11)) {
+	 if(any(DF$Type==12|DF$Type==13|DF$Type==14)) {
 		warning("inhibit, alarm, and priority gates will be treated as and")
 	}
 
 	max_len<-length(which(DF$Type>10))+1
 	cs_lists<-list(NULL)
 	
-if(max_len>1)  {
-	for(len in 2:max_len)  {
-		cs_lists<-c(cs_lists, list(NULL))
-	}
+if (max_len>1)  {
+  for (len in 2:max_len) {
+    cs_lists<-c(cs_lists, list(NULL))
+  }
 }
 
 	child_rows<-which(DF$CParent==DF$ID[1])

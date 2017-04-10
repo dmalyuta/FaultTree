@@ -47,7 +47,15 @@ test.basic<-function(DF, at,  display_under, tag)  {
 		stop("Prefixes 'E_', 'G_', and 'H_' are reserved for auto-generated tags.")
 		}
 	}
-
+	
+	## enforce only one child for a passthrough gate
+	if(DF$Type[parent]==17) {
+	  # parent is a passthrough gate, does it have any children?
+	  chids <- DF$ID[which(DF$GParent==DF$ID[parent])]
+	  if (length(chids)>0) {
+	    stop(paste0("attempted to make passthrough gate (id: ",DF$ID[parent],") a parent, but passthrough gate already has one child!"))
+	  }
+	}
 
 ## There is no need to limit connections to OR gates for calculation reasons
 ## Since AND gates are calculated in binary fashion, these too should not

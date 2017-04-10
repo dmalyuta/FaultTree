@@ -98,15 +98,15 @@ nodeEnter.append("text")
 .text(function (d) {
 return d.description;})
 .call(wrap, rectW);
-var orGate="m 75,85 c  -1.4, -10, .6, -22 -15, -30 -15.6, 8, -13.4, 20, -15, 30, 0, 0 3, -8 15, -8 10, 0 15, 8 15, 8 z";
-var andGate="m 45,70 0,15 30,0 0,-15  a15,15 .2 0,0 -15,-15 a15,15 .2 0,0 -15,15";
-var priorityGate="m 45,70 0,15 30,0 0,-15  a15,15 .2 0,0 -15,-15 a15,15 .2 0,0 -15,15 m 0,10 30,0";
-var inhibitGate="m 60,55 -15,6.340 0,17.3205 15,6.340  15,-6.340 0,-17.3205 z";
-var alarmGate="m 75,85 c  -1.4, -10, .6, -22 -15, -30 -15.6, 8, -13.4, 20, -15, 30, 0, 0 3, -8 15, -8 10, 0 15, 8 15, 8 z m -30,0 v5 c0, 0 3, -8 15, -8 10, 0 15, 8 15, 8 v-5";
-var voteGate="m 75,85 c  -1.4,-10,.6,-22-15,-30  -15.6,8,-13.4,20,-15,30 m 0,0 0,10 30,0 0,-10 m-28,-7.5 27,0";
-var house="m 45,70 0,15 30,0 0,-15 -15,-15  -15,15";
-var undeveloped="m 60,53 l 30,15 l -30,15 l -30,-15 z";
-var component="m 75, 70 a15,15 .2 0,0 -15,-15 a15,15 .2 0,0 -15,15 a15,15 .2 0,0 15,15 a15,15 .2 0,0 15,-15";
+var orGate="m 60,40 l 0,15 m 15,30 c  -1.4, -10, .6, -22 -15, -30 -15.6, 8, -13.4, 20, -15, 30, 0, 0 3, -8 15, -8 10, 0 15, 8 15, 8 z";
+var andGate="m 60,40 l 0,15 m -15,15 0,15 30,0 0,-15  a15,15 .2 0,0 -15,-15 a15,15 .2 0,0 -15,15";
+var priorityGate="m 60,40 l 0,15 m -15,15 0,15 30,0 0,-15  a15,15 .2 0,0 -15,-15 a15,15 .2 0,0 -15,15 m 0,10 30,0";
+var inhibitGate="m 60,40 l 0,15 m 0,0 -15,6.340 0,17.3205 15,6.340  15,-6.340 0,-17.3205 z";
+var alarmGate="m 60,40 l 0,15 m 15,30 c  -1.4, -10, .6, -22 -15, -30 -15.6, 8, -13.4, 20, -15, 30, 0, 0 3, -8 15, -8 10, 0 15, 8 15, 8 z m -30,0 v5 c0, 0 3, -8 15, -8 10, 0 15, 8 15, 8 v-5";
+var voteGate="m 60,40 l 0,15 m 15,30 c  -1.4,-10,.6,-22-15,-30  -15.6,8,-13.4,20,-15,30 m 0,0 0,10 30,0 0,-10 m-28,-7.5 27,0";
+var house="m 60,40 l 0,15 m -15,15 0,15 30,0 0,-15 -15,-15  -15,15";
+var undeveloped="m 60,40 l 0,15 m 0,0 l 30,15 l -30,15 l -30,-15 z";
+var component="m 60,40 l 0,15 m 15,15 a15,15 .2 0,0 -15,-15 a15,15 .2 0,0 -15,15 a15,15 .2 0,0 15,15 a15,15 .2 0,0 15,-15";
 nodeEnter.append("path")
 .attr("d",
 function(d) {switch (d.type) {
@@ -124,6 +124,8 @@ case 15 : return(voteGate);
 break;
 case 16 : return(voteGate);
 break;
+case 17 : // passthrough gate, no gate to draw...
+break;
 case 6 : return(house);
 break;
 case 7 : return(undeveloped);
@@ -131,7 +133,7 @@ break;
 default : return(component);
 }})
 .attr({stroke:"black",
-"stroke-width":1.5,
+"stroke-width":1,
 "stroke-linejoin":"round",
 fill: "#fff"});
 nodeEnter.append("text")
@@ -143,7 +145,9 @@ nodeEnter.append("text")
 //.attr("stroke", "white")
 //.attr("stroke-width", ".5px")
 .text(function (d) {
-return d.moe>0 ? d.moe : d.id ;});
+if (d.type != 17) {
+return d.moe>0 ? d.moe : d.id;
+}});
 nodeEnter.append("text")
 .attr("x", rectW / 2-2)
 .attr("y", TrectH  + 45)
@@ -305,7 +309,7 @@ svg.attr("transform",
 function elbow(d) {
 var sourceY = d.source.y+TrectH,
 sourceX = d.source.x+rectW/2-2,
-targetY = d.target.y+TrectH+20,
+targetY = d.target.y+TrectH,
 targetX = d.target.x+rectW/2-2;
 return "M" + sourceX + "," + sourceY
 + "V" + (sourceY+targetY)/2
