@@ -93,7 +93,7 @@ return d._children ? "blue" : "black";})
 return d._children ? "lightcyan" : "#fff";});
 nodeEnter.append("text")
 .attr("x", rectW/2)
-.attr("y", 10)
+.attr("y", 11)
 .attr("text-anchor", "middle")
 .text(function (d) {
 return d.description;})
@@ -105,6 +105,7 @@ var inhibitGate="m 60,55 -15,6.340 0,17.3205 15,6.340  15,-6.340 0,-17.3205 z";
 var alarmGate="m 75,85 c  -1.4, -10, .6, -22 -15, -30 -15.6, 8, -13.4, 20, -15, 30, 0, 0 3, -8 15, -8 10, 0 15, 8 15, 8 z m -30,0 v5 c0, 0 3, -8 15, -8 10, 0 15, 8 15, 8 v-5";
 var voteGate="m 75,85 c  -1.4,-10,.6,-22-15,-30  -15.6,8,-13.4,20,-15,30 m 0,0 0,10 30,0 0,-10 m-28,-7.5 27,0";
 var house="m 45,70 0,15 30,0 0,-15 -15,-15  -15,15";
+var undeveloped="m 60,53 l 30,15 l -30,15 l -30,-15 z";
 var component="m 75, 70 a15,15 .2 0,0 -15,-15 a15,15 .2 0,0 -15,15 a15,15 .2 0,0 15,15 a15,15 .2 0,0 15,-15";
 nodeEnter.append("path")
 .attr("d",
@@ -124,6 +125,8 @@ break;
 case 16 : return(voteGate);
 break;
 case 6 : return(house);
+break;
+case 7 : return(undeveloped);
 break;
 default : return(component);
 }})

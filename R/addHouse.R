@@ -66,7 +66,8 @@ addHouse<-function(DF, at, prob=1, tag="", name="", name2="", description="")  {
 		Description=	description	,
 		UType=	0	,
 		UP1=	-1	,
-		UP2=	-1	
+		UP2=	-1	,
+		Collapse = FALSE
 	)
 
 

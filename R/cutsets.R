@@ -6,7 +6,7 @@ cutsets<-function(DF)  {
 	 if(any(DF$Type==15)) {
 		stop("vote gate not recognized by cutsets function")
 	 }	 
-	 if(DF$Type>11) {
+	 if(any(DF$Type>11)) {
 		warning("inhibit, alarm, and priority gates will be treated as and")
 	}
 

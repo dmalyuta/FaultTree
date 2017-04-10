@@ -14,7 +14,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-addProbability<-function(DF, at, prob, display_under=NULL, tag="", name="", name2="", description="", collapse=FALSE)  {
+addProbability<-function(DF, at, prob, display_under=NULL, tag="", name="", name2="", description="")  {
   
   at <- tagconnect(DF, at)
 
@@ -57,7 +57,7 @@ addProbability<-function(DF, at, prob, display_under=NULL, tag="", name="", name
 		UType=	0	,
 		UP1=	-1	,
 		UP2=	-1	,
-		Collapse = collapse
+		Collapse = FALSE
 	)
 
 

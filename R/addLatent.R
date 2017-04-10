@@ -92,7 +92,8 @@ addLatent<-function(DF, at, mttf, mttr=NULL, pzero="repair", inspect=NULL, displ
 		Description=	description	,
 		UType=	0	,
 		UP1=	-1	,
-		UP2=	-1	
+		UP2=	-1	,
+		Collapse = FALSE
 	)
 
 

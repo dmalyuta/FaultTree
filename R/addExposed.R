@@ -108,7 +108,8 @@
 		Description = description,
 		UType=	0	,
 		UP1=	-1	,
-		UP2=	-1
+		UP2=	-1,
+		Collapse = FALSE
 	)
 
 	DF <- rbind(DF, Dfrow)

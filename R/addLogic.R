@@ -36,6 +36,7 @@ addLogic<-function(DF, type, at, reversible_cond=FALSE, cond_first=TRUE, human_p
 		comb=15,
 		vote=15,
 		## atleast=16, # not allowed by addLogic
+		passthrough=17,
 		stop("gate type not recognized")
 	)
 
@@ -44,7 +45,7 @@ addLogic<-function(DF, type, at, reversible_cond=FALSE, cond_first=TRUE, human_p
 ## This proposed addition will be RAM model		
 		if(any(DF$Type==5) || any(DF$Type==16)) {	
 			stop("RAM system event event called for in PRA model")
-		}	
+		}
 	}
 	
 	info<-test.basic(DF, at,  display_under=NULL, tag)
@@ -54,8 +55,8 @@ addLogic<-function(DF, type, at, reversible_cond=FALSE, cond_first=TRUE, human_p
 	condition<-info[4]
 	
 	if(DF$Type[parent]==15) {
-		if(tp!=10) {
-			stop("only OR or basic event can connect to priority gate")
+		if(tp!=10 && tp!=17) {
+			stop("only OR, PASSTHROUGH or basic event can connect to priority gate")
 		}
 	}
 

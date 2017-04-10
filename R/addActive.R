@@ -72,7 +72,8 @@ addActive<-function(DF, at, mttf=NULL, mttr=NULL, display_under=NULL, tag="", na
 		Description=	description	,
 		UType=	0	,
 		UP1=	-1	,
-		UP2=	-1	
+		UP2=	-1	,
+		Collapse = FALSE
 	)
 
 	DF<-rbind(DF, Dfrow)

@@ -60,7 +60,8 @@ addDemand<-function(DF, at, mttf, tag="", name="", name2="", description="")  {
 		Description=	description	,
 		UType=	0	,
 		UP1=	-1	,
-		UP2=	-1	
+		UP2=	-1	,
+		Collapse = FALSE
 	)
 
 
