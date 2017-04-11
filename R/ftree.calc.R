@@ -63,7 +63,7 @@ for(row in dim(sDF)[1]:1)  {
 			siblingDF<-rbind(siblingDF,DFrow)
 		}
 	}else{
-		if(sDF$Type[row]>10 && sDF$Type[row]!=15) {
+		if(sDF$Type[row]>10 && sDF$Type[row]!=15 && sDF$Type[row]!=17) {
 ## less than 2 feeds to other than OR calc
 		stop(paste0("insufficient feeds at gate ", sDF$ID[row]))
 		}
@@ -75,7 +75,7 @@ for(row in dim(sDF)[1]:1)  {
 	}	
 	
 	## OR gate calculation
-	if(sDF$Type[row]==10)  {
+	if(sDF$Type[row]==10 || sDF$Type[row]==17)  {
 	resultDF<-ORcalc(siblingDF)
 	}
 
@@ -84,7 +84,7 @@ for(row in dim(sDF)[1]:1)  {
 	resultDF<-ANDcalc(siblingDF)
 	}
 
-	if(sDF$Type[row]>11 && sDF$Type[row]!=15)  {
+	if(sDF$Type[row]>11 && sDF$Type[row]!=15 && sDF$Type[row]!=17)  {
 ## Code is required in addXXX to assign the first entry as Condition==1)
 
 ## test the Condition setting for the first child

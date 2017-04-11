@@ -35,6 +35,7 @@ ftree.make<-function(type, reversible_cond=FALSE, cond_first=TRUE,
 		comb=15,
 		vote=15,
 		## atleast=16, # not allowed by ftree.make
+		passthrough=17,
 		stop("gate type not recognized")
 	)
 
